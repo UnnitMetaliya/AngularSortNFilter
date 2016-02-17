@@ -1,0 +1,62 @@
+<html>
+<head>
+	<title>Sort & Filter</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <style>
+        body { padding-top:50px; }
+    </style>
+
+    <!-- JS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+	<div class="container" ng-app="sortApp" ng-controller="mainController">
+		<div class="alert alert-info">
+			<p> Sort Type: {{ sortType }}</p>
+			<p>Sort Reverese: {{sortReverse}}</p>
+			<p>Search Query: {{ searchFish}} </p>
+		</div>
+
+		<table class="table table-bordered table-stripped">
+			<thead>
+				<tr>
+					<td>
+						<a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse" >
+							Indian Food Items
+							<span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+							<span ng-show="sortType =='name' && sortReverse" class="fa fa-caret-up"></span>
+						</a>
+
+					</td>
+
+					<td>
+						<a href="#" ng-click="sortType = 'fish'">
+							Food Type
+							<span ng-show="sortType == 'fish'" class="fa fa-caret-down"></span>
+						</a>
+					</td>
+
+					<td>
+						<a href="#" ng-click="sortType ='tastiness'">
+							Awesomeness Level
+							<span ng-show="sortType =='tastiness'" class="fa fa-caret-down"></span>
+						</a>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- We will be accomplishing sorting feature using two of the variables that we have created in our app -->
+
+				<tr ng-repeat="roll in sushi | orderBy:sortType:sortReverse">
+					<td> {{roll.name}} </td>
+					<td> {{roll.fish}} </td>
+					<td> {{roll.tastiness}} </td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>
